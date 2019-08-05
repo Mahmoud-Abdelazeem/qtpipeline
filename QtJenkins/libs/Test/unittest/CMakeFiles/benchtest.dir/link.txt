@@ -1,2 +1,0 @@
-/usr/bin/ar qc libbenchtest.a  CMakeFiles/benchtest.dir/mahTest/mahtest.cpp.o CMakeFiles/benchtest.dir/benchtest_autogen/mocs_compilation.cpp.o
-/usr/bin/ranlib libbenchtest.a

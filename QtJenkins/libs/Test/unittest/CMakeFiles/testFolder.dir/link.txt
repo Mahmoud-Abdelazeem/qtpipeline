@@ -1,2 +1,0 @@
-/usr/bin/ar qc libtestFolder.a  CMakeFiles/testFolder.dir/testFolder_autogen/mocs_compilation.cpp.o
-/usr/bin/ranlib libtestFolder.a
