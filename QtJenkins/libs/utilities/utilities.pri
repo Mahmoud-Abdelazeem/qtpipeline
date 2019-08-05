@@ -1,0 +1,3 @@
+HEADERS += ./checkclass.h
+
+SOURCES +=
