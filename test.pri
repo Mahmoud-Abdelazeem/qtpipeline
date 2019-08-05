@@ -1,7 +1,10 @@
-HEADERS += 
+HEADERS += \ 
+    $$PWD/checkclass.h
 
 
-SOURCES += 
+SOURCES += \ 
+    $$PWD/ckeckclass.cpp \
+    $$PWD/main.cpp
 
 
-#CMD1 = $$system(cmake CMakeLists.txt)
+CMD1 = $$system(cmake CMakeLists.txt)

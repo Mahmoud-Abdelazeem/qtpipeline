@@ -1,11 +1,11 @@
 #include <QCoreApplication>
 #include <memory>
 #include <QDebug>
-
+#include <QVector>
 using namespace std;
 
 class stack {
-    vector<int> vstack = {};
+    QVector<int> vstack = {};
 public:
     void push (int value) {vstack.push_back(value);}
 
