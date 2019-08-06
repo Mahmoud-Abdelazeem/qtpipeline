@@ -25,14 +25,16 @@ pipeline{
 	stages{
           stage('Build'){
           steps {
-          
-                 sh  "bash ./QtJenkins/run_qmake.sh" 
-                 
-                 dir("QtJenkins/libs/Test")
+                  sh  "bash ./QtJenkins/run_qmake.sh" 
+                }
+        }
+        
+        stage ('BuildTest')
+        steps{
+                dir("QtJenkins/libs/Test")
                  cmake arguments: '-DCMAKE_TOOLCHAIN_FILE=$HOME/vcpkg/scripts/buildsystems/vcpkg.cmake', installation: 'InSearchPath'
                  cmakeBuild buildType: 'Release', cleanBuild: true, installation: 'InSearchPath', steps: [[withCmake: true]]
                  echo "PATH is: $PATH"
-                }
         }
         
         stage('UnitTest'){
