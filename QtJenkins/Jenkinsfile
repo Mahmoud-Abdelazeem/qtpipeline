@@ -1,9 +1,9 @@
 #!groovy
 pipeline{
 	agent any
-	
+	~/workspace/qtpipeline/QtJenkins
 	environment {
-    PATH = "~/Projects/qtpipeline:$PATH"
+    PATH = "~/workspace/qtpipeline/QtJenkins/libs/utilities/:$PATH"
     }
     
 	triggers{ 
