@@ -1,0 +1,77 @@
+#!groovy
+pipeline{
+	agent any
+	
+	environment {
+    PATH = "~/Projects/qtpipeline:$PATH"
+    }
+    
+	triggers{ 
+	
+        pollSCM('H/15 1 * * *')
+    }
+
+	options{
+		buildDiscarder(logRotator(numToKeepStr: '10'))
+	}
+
+	parameters{
+		booleanParam name: 'RUN_TESTS', defaultValue: true, description: 'Run Tests?'
+		booleanParam name: 'RUN_ANALYSIS', defaultValue: true, description: 'Run Static Code Analysis?'
+		booleanParam name: 'DEPLOY', defaultValue: true, description: 'Deploy Artifacts?'
+	}
+	
+	
+	stages{
+          stage('Build'){
+          steps {
+                 cmake arguments: '-DCMAKE_TOOLCHAIN_FILE=$HOME/vcpkg/scripts/buildsystems/vcpkg.cmake', installation: 'InSearchPath'
+
+                 cmakeBuild buildType: 'Release', cleanBuild: true, installation: 'InSearchPath', steps: [[withCmake: true]]
+                 echo "PATH is: $PATH"
+                }
+        }
+        
+        stage('UnitTest'){
+            when{
+                    environment name: 'RUN_TESTS', value: 'true'
+                }
+                
+            steps{
+                dir("unittest")
+                {
+                    sh 'export PATH=$PATH:~/Projects/qtpipeline/'
+                   
+                    sh  "bash ./run_test.sh"                     
+                }
+            }
+          
+          post{
+            failure{
+                sh "bash ./time_check.sh"
+                junit "*unittest/test-result.xml"
+              }
+            }     
+        }
+        
+        stage('Analyse'){
+            when {
+                environment name: 'RUN_ANALYSIS', value: 'true'
+            }
+            steps{
+                sh label: '', returnStatus: true, script: 'cppcheck --xml --xml-version=2 --std=c++14 --errorlist> cppcheck-result.xml'
+                publishCppcheck allowNoReport: true, ignoreBlankFiles: true, pattern: '**/cppcheck-result.xml'
+            }
+        }
+
+        stage('Deploy'){
+            when{
+                environment name: 'DEPLOY', value: 'true'
+            }
+            steps{
+                sh label: '', returnStatus: true, script: '''cp ~/workspace/example-pipeline ~
+                cp unittest/mahTest/mahtest ~'''
+            }
+        }
+	}
+}
