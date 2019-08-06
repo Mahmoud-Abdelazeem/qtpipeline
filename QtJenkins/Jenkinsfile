@@ -1,7 +1,7 @@
 #!groovy
 pipeline{
 	agent any
-	~/workspace/qtpipeline/QtJenkins
+
 	environment {
     PATH = "~/workspace/qtpipeline/QtJenkins/libs/utilities/:$PATH"
     }
