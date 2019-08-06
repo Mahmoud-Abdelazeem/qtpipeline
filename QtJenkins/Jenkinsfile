@@ -26,9 +26,9 @@ pipeline{
           stage('Build'){
           steps {
           
-                 sh  "bash ./run_qmake.sh" 
+                 sh  "bash ./QtJenkins/run_qmake.sh" 
                  
-                 dir("libs/Test")
+                 dir("QtJenkins/libs/Test")
                  cmake arguments: '-DCMAKE_TOOLCHAIN_FILE=$HOME/vcpkg/scripts/buildsystems/vcpkg.cmake', installation: 'InSearchPath'
                  cmakeBuild buildType: 'Release', cleanBuild: true, installation: 'InSearchPath', steps: [[withCmake: true]]
                  echo "PATH is: $PATH"
@@ -41,7 +41,7 @@ pipeline{
                 }
                 
             steps{
-                dir("libs/Test/unittest")
+                dir("QtJenkins/libs/Test/unittest")
                 {
                     sh 'export PATH=$PATH:~/Projects/qtpipeline/'
                    
