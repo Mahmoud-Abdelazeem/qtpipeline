@@ -47,7 +47,7 @@ pipeline{
             steps{
                 dir("QtJenkins/libs/Test/unittest")
                 {
-                    sh 'export PATH=$PATH:~/Projects/qtpipeline/QtJenkins/libs/utilities/'
+                    sh 'export PATH=$PATH:~/workspace/qtpipeline/QtJenkins/libs/utilities/'
                    
                     sh  "bash ./run_test.sh"                     
                 }
