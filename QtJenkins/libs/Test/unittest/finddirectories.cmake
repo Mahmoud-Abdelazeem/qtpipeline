@@ -1,12 +1,12 @@
 cmake_minimum_required(VERSION 3.10.2)
 
-    include_directories(~/Projects/qtpipeline/QtJenkins/libs/utilities)
-    include_directories(~/workspace/qtpipeline/QtJenkins/libs/utilities)
+    include_directories(~/Projects/qtpipeline/QtJenkins/libs/Benchtop)
+    include_directories(~/workspace/qtpipeline/QtJenkins/libs/Benchtop)
 
     
     set(LIB_FOLDER
         ~/Projects/JenkinsPipeline/pipelineJenkins/
-        ~/workspace/qtpipeline/QtJenkins/libs/utilities/
+        ~/workspace/qtpipeline/QtJenkins/libs/Benchtop/
        )
         
     link_directories (${LIB_FOLDER})
