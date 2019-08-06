@@ -4,5 +4,6 @@ TEMPLATE    = subdirs
 
 CONFIG += ordered
 
-SUBDIRS             =   libs/utilities \
+SUBDIRS             =   libs/Benchtop \
                         libs/Test \
+
