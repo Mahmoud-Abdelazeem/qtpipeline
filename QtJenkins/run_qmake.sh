@@ -3,6 +3,6 @@
 # as a first step 
 qmake 
 
-make
+#make
 
 # second what should we build?
