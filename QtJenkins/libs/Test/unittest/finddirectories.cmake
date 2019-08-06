@@ -1,6 +1,8 @@
 cmake_minimum_required(VERSION 3.10.2)
 
     include_directories(~/Projects/qtpipeline/QtJenkins/libs/utilities)
+    include_directories(~/workspace/qtpipeline/QtJenkins/libs/utilities)
+
     
     set(LIB_FOLDER
         ~/Projects/JenkinsPipeline/pipelineJenkins/
