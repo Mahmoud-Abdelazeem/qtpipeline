@@ -1,7 +1,7 @@
 #!bin/bash
 
 # as a first step 
-qmake 
+qmake QtJenkins.pro
 
 #make
 
