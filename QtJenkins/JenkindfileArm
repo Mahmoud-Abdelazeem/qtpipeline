@@ -1,0 +1,60 @@
+#!groovy
+pipeline{
+	agent any
+
+	environment {
+    PATH = "~/workspace/qtpipeline/QtJenkins/libs/utilities/:$PATH"
+    }
+    
+	triggers{ 
+	
+        pollSCM('H/15 1 * * *')
+    }
+
+	options{
+		buildDiscarder(logRotator(numToKeepStr: '10'))
+	}
+
+	parameters{
+		booleanParam name: 'RUN_TESTS', defaultValue: true, description: 'Run Tests?'
+		 
+	
+	
+	stages{
+          stage('Build'){
+          steps {
+                  sh  "bash ./QtJenkins/run_qmake.sh" 
+                }
+        }
+        
+        stage ('BuildTest'){
+        steps{
+                 dir("QtJenkins/libs/Test") {
+                 cmake arguments: '-DCMAKE_TOOLCHAIN_FILE=$HOME/vcpkg/scripts/buildsystems/vcpkg.cmake', installation: 'InSearchPath'
+                 cmakeBuild buildType: 'Release', cleanBuild: true, installation: 'InSearchPath', steps: [[withCmake: true]]
+                 echo "PATH is: $PATH"
+                 }
+        }
+        }
+        
+        stage('UnitTest'){
+            when{
+                    environment name: 'RUN_TESTS', value: 'true'
+                }
+                
+            steps{
+                dir("QtJenkins/libs/Test/unittest")
+                {
+                   sh  "bash ./run_test.sh"                     
+                }
+            }
+          
+          post{
+            failure{
+                sh "bash ./time_check.sh"
+                junit "*unittest/test-result.xml"
+              }
+            }     
+        }
+        
+      
