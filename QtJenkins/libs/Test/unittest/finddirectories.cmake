@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.10.2)
 
     include_directories(~/Projects/qtpipeline/QtJenkins/libs/Benchtop)
-    include_directories(~/workspace/qtpipeline/QtJenkins/libs/Benchtop)
+   # include_directories(~/workspace/qtpipeline/QtJenkins/libs/Benchtop)
 
         include_directories($WORKSPACE/qtpipeline/QtJenkins/libs/Benchtop)
 
