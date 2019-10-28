@@ -51,13 +51,28 @@ pipeline{
                 }
             }
           
-          post{
-            failure{
-                sh "bash ./time_check.sh"
-                junit "*unittest/test-result.xml"
-              }
-            }     
+          post {
+        success {
+          // publish html
+          publishHTML target: [
+              allowMissing: false,
+              alwaysLinkToLastBuild: false,
+              keepAll: true,
+              reportDir: 'coverage',
+              reportFiles: 'index.html',
+              reportName: 'RCov Report'
+            ]
         }
+      }
+    }
+  }
+  post {
+    always {
+      echo "Send notifications for result: ${currentBuild.result}"
+    }
+  }
+}
+
         
         stage('Analyse'){
             when {
