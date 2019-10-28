@@ -10,7 +10,7 @@ cmake_minimum_required(VERSION 3.10.2)
 
     set(LIB_FOLDER
        ~/Projects/JenkinsPipeline/pipelineJenkins/
-       ~/workspace/qtpipeline/QtJenkins/libs/Benchtop
+      # ~/workspace/qtpipeline/QtJenkins/libs/Benchtop
        )
         
     link_directories (${LIB_FOLDER})
