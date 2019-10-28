@@ -47,7 +47,7 @@ pipeline{
             steps{
                 dir("QtJenkins/libs/Test/unittest")
                 {
-                   sh  "bash ./run_test.sh"                     
+                  sh  "bash ./run_test.sh -f desktop "                   
                 }
             }
           
