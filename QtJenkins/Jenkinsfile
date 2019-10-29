@@ -49,7 +49,7 @@ pipeline{
                 {
                   sh  "bash ./run_test.sh -f desktop "                   
                 }
-            }
+			}
           
           post {
         success {
@@ -64,15 +64,10 @@ pipeline{
             ]
         }
       }
-    }
+    
   }
-  post {
-    always {
-      echo "Send notifications for result: ${currentBuild.result}"
-    }
-  }
-}
-
+  
+  
         
         stage('Analyse'){
             when {

@@ -1,16 +1,20 @@
 cmake_minimum_required(VERSION 3.10.2)
 
-   include_directories(~/Projects/qtpipeline/QtJenkins/libs/Benchtop)
-   include_directories(~/workspace/qtpipeline/QtJenkins/libs/Benchtop)
+  message(STATUS "THE Project dir is ${PROJECT_SOURCE_DIR}")
+  get_filename_component(DIR_Distimatic ../../../ ABSOLUTE)
+    message(STATUS "THE Current DIR is: ${DIR_Distimatic}")
+
+   include_directories(${DIR_Distimatic}/libs/Benchtop)
+   include_directories(${DIR_Distimatic}/libs/Benchtop)
    
-      include_directories(~/workspace/qtpipeline/QtJenkins/libs/Benchtop)
+      include_directories(${DIR_Distimatic}/libs/Benchtop)
 
 
-        include_directories($WORKSPACE/qtpipeline/QtJenkins/libs/Benchtop)
+        include_directories(${DIR_Distimatic}/libs/Benchtop)
 
     set(LIB_FOLDER
-    #   ~/Projects/JenkinsPipeline/pipelineJenkins/
-       ~/workspace/qtpipeline/QtJenkins/libs/Benchtop
+       #~/Projects/JenkinsPipeline/pipelineJenkins/
+       ${DIR_Distimatic}/libs/Benchtop
        )
         
     link_directories (${LIB_FOLDER})
